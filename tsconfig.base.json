@@ -1,0 +1,27 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "esnext",
+    "lib": ["es2015", "dom"],
+    "baseUrl": "./",
+    "strictPropertyInitialization": false,
+    "paths": {
+      "@config/netflicks": ["libs/config/src/index.ts"],
+      "@core/*": ["libs/core/auth/src/lib/*"],
+      "@core/auth": ["libs/core/auth/src/index.ts"],
+      "@env/*": ["apps/netflicks/src/environments/*"],
+      "@feature/*": ["libs/feature/src/lib/*"],
+      "@feature/netflicks": ["libs/feature/src/index.ts"],
+      "@shared/netflicks": ["libs/shared/src/index.ts"],
+      "@layout/netflicks": ["libs/layout/src/index.ts"],
+      "@material/module": ["src/app/material.module"],
+      "@shared/styles": ["libs/styles/src/index.ts"],
+    }
+  }
+}

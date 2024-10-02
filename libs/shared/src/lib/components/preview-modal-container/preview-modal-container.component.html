@@ -1,0 +1,379 @@
+<!-- Close dialog -->
+<div class="previewModal-container-close">
+  <div class="previewModal-player-wrapper previewModal-close">
+    <nf-close-button
+      [mediumSize]="true"
+      (click)="onClickClose()"
+    ></nf-close-button>
+  </div>
+</div>
+
+<div class="previewModal-player-container">
+  <!-- Cover image dialog -->
+  <div class="previewModal-player-image">
+    @if(showVideoPreview){ @defer (when showVideoPreview){
+    <div class="youtube-container-dialog">
+      @if(config.data.indexSelectedItem){
+      <youtube-player
+        #player
+        [videoId]="this.keyYTVideo"
+        [width]="'100%'"
+        [height]="'100%'"
+        [playerVars]="playerVars"
+      ></youtube-player>
+      }
+    </div>
+    } }@else {
+    <img
+      alt="preview-modal-cover"
+      [ngSrc]="this.config.data.coverImagePreviewModal"
+      class="previewModal-cover-image"
+      width="650"
+      height="365"
+    />
+    }
+  </div>
+
+  <!-- Wrapper cover image dialog -->
+  <div class="previewModal-player-wrapper">
+    <div class="wrapper-logo-img">
+      @if(config.data.logoImageURL !== null){
+      <img
+        alt="logo image"
+        [ngSrc]="
+          'https://image.tmdb.org/t/p/w500' + this.config.data.logoImageURL
+        "
+        width="400"
+        height="100"
+      />
+      }
+    </div>
+
+    <div class="buttons-controls-container">
+      <!-- Play -->
+      <button
+        class="btn btn-light simple-btn responsive-btn p-2"
+        (click)="playVideo()"
+      >
+        <div class="container-svg icon baseline">
+          <svg
+            width="32"
+            height="32"
+            fill="currentColor"
+            class="bi bi-play-fill"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M5 2.69127C5 1.93067 5.81547 1.44851 6.48192 1.81506L23.4069 11.1238C24.0977 11.5037 24.0977 12.4963 23.4069 12.8762L6.48192 22.1849C5.81546 22.5515 5 22.0693 5 21.3087V2.69127Z"
+            ></path>
+          </svg>
+        </div>
+
+        <div class="space-between"></div>
+
+        <span class="text-btn">Play</span>
+      </button>
+
+      <div (click)="onClickShowCheckIcon()">
+        @if(showCheckIcon){
+        <!-- Add button  -->
+        <nf-add-button [mediumSize]="true"></nf-add-button>
+
+        <!-- Hover text add button -->
+        <div class="container-hover-btn">
+          <h5 class="hover-text-add-btn">Add to My List</h5>
+
+          <div class="container-triangle">
+            <svg id="triangle" viewBox="0 0 100 100" fill="#e6e6e6">
+              <polygon points="0 0, 100 0, 50 50" />
+            </svg>
+          </div>
+        </div>
+        }@else {
+        <!-- Check -->
+        <nf-check-button [mediumSize]="true"></nf-check-button>
+
+        <!-- Hover text check button -->
+        <div class="container-hover-btn">
+          <h5 class="hover-text-check-btn">Remove from My List</h5>
+
+          <div class="container-triangle">
+            <svg id="triangle" viewBox="0 0 100 100" fill="#e6e6e6">
+              <polygon points="0 0, 100 0, 50 50" />
+            </svg>
+          </div>
+        </div>
+        }
+      </div>
+
+      <!-- Thumb up -->
+      <nf-thumb-up-button [mediumSize]="true"></nf-thumb-up-button>
+    </div>
+
+    <div class="buttons-controls-messagging"></div>
+  </div>
+
+  <!-- Audio preview dialog -->
+  <div
+    class="previewModal-player-wrapper preview-audio-toggle"
+    (click)="onClickSpeakerIcon()"
+  >
+    @if(showSpeakerUpIcon){
+    <!-- Speaker up -->
+    <nf-speakerup-button [mediumSize]="true"></nf-speakerup-button>
+    }@else {
+    <!-- Speaker down -->
+    <nf-speakerdown-button [mediumSize]="true"></nf-speakerdown-button>
+    }
+  </div>
+
+  <!-- Container Dialog -->
+  <div class="detail-modal-container">
+    <div class="detail-modal">
+      <div class="previewModal-left">
+        <div class="first-line-info">
+          @if(config.data.randMatchScore){
+          <span class="match-score"
+            >{{
+              this.config.data.randMatchScore[
+                this.config.data.indexSelectedItem
+              ]
+            }}% Match</span
+          >
+          }
+
+          <span class="year">2022</span>
+          @if(config.data.numbersOfSeasonsKeepWatching$){
+          <span class="seasons"
+            >{{
+              (config.data.numbersOfSeasonsKeepWatching$ | async)[
+                config.data.indexSelectedItem
+              ]
+            }}
+            seasons</span
+          >
+          }
+
+          <div class="player-feature-badge">
+            <span>HD</span>
+          </div>
+        </div>
+
+        <div class="second-line-info">
+          <div class="maturity-rating">
+            @if(config.data.ratingNumberCover){
+            <span class="rating-number"
+              >{{
+                this.config.data.ratingNumberCover[
+                  this.config.data.indexSelectedItem
+                ]
+              }}+</span
+            >
+            }
+          </div>
+        </div>
+
+        <div class="preview-modal-synopsis">
+          <div [innerHTML]="(this.seriesTvMainInfoDetail$ | async)?.summary">
+            {{ (this.seriesTvMainInfoDetail$ | async)?.summary }}
+          </div>
+        </div>
+      </div>
+
+      <div class="previewModal-right">
+        <div class="about-container">
+          <div class="previewModal-tags">
+            <span class="previewModal-tags-label">Cast:</span>
+            @for(personCast of peopleCastSeries$ | async; track $index){
+            <a class="tag-item">{{ getMoreCastPeople(personCast, $index) }}</a>
+            }@empty {
+            <a class="tag-item">There are no person</a>
+            }
+
+            <a class="tag-more" (click)="onClickScrollToMore()"> more </a>
+          </div>
+
+          <div class="previewModal-tags">
+            <span class="previewModal-tags-label">Genres:</span>
+            @for(genre of (this.seriesTvMainInfoDetail$ | async)?.genres; track
+            $index){
+            <a class="tag-item"
+              >{{ genre
+              }}{{
+                $index ===
+                (this.seriesTvMainInfoDetail$ | async)?.genres.length - 1
+                  ? ''
+                  : ','
+              }}</a
+            >
+            }@empty {
+            <a class="tag-item">There are no genre</a>
+            }
+          </div>
+
+          <div class="previewModal-tags">
+            <span class="previewModal-tags-label">This show is:</span>
+            @for(randWord of selectedRandWords; track $index){
+            <a class="tag-item">
+              {{ randWord
+              }}{{ $index === selectedRandWords.length - 1 ? '' : ',' }}
+            </a>
+            }@empty {
+            <a class="tag-item">Awesomeeee!</a>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Episode list -->
+    <div class="episode-selector">
+      <div class="episode-selector-header">
+        <div class="title-selector">
+          <h3>Episodes</h3>
+
+          @if(seasonSelected){
+          <div class="title-selector-more-info">
+            Season {{ seasonSelected }}
+          </div>
+          }@else {
+          <div class="title-selector-more-info">No season selected</div>
+          }
+        </div>
+
+        <div class="dropdown-selector">
+          <div class="dropdown">
+            <button
+              type="button"
+              class="btn btn-secondary dropdown-toggle dropdown-nf"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              Season {{ seasonSelected }}
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              @for(item of this.definedArrayDropdownSeasons(
+              (this.finalArrayTvInfo$ | async)?.length ); track $index){
+              <a class="dropdown-item" (click)="onSelectSeason(item)"
+                >Seasons {{ item }}
+                <span class="episodes-dd"
+                  >(
+                  {{(this.finalArrayTvInfo$ |async)?.[item - 1]?.value?.length}}
+                  Episodes)</span
+                >
+              </a>
+              }@empty {
+              <a class="dropdown-item">There are no episodes</a>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Container Episode selector -->
+      <div class="episode-selector-container">
+        @for(series of (seriesTvInfo$ | async)?.[(seriesSelectedDropdown$ |
+        async )]?.value; track $index){
+        <div class="titleCardList-container">
+          <div class="titleCard-title-index">{{ series.number }}</div>
+
+          @defer (when series.image?.medium){
+          <div class="titleCard-image-wrapper">
+            <img
+              [ngSrc]="series.image?.medium"
+              width="130"
+              height="74"
+              alt="episode image"
+            />
+            <div class="play-icon-img">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                stroke="white"
+                stroke-width="0.3"
+              >
+                <path
+                  d="M4 2.69127C4 1.93067 4.81547 1.44851 5.48192 1.81506L22.4069 11.1238C23.0977 11.5037 23.0977 12.4963 22.4069 12.8762L5.48192 22.1849C4.81546 22.5515 4 22.0693 4 21.3087V2.69127Z"
+                  fill="#fff"
+                ></path>
+              </svg>
+            </div>
+          </div>
+          }
+
+          <div class="titleCardList-metadataWrapper">
+            <div class="titleCardList-title">
+              <span class="titleCardList-title-text">{{ series.name }}</span>
+              <span class="duration">{{ series.runtime }}m</span>
+            </div>
+
+            <div
+              class="titleCardList-synopsis"
+              [innerHTML]="series.summary"
+            ></div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+
+    <!-- About Film -->
+    <div class="about-wrapper">
+      <div class="about-header">
+        <h3 class="previewModal-section-header">
+          <span class="previewModal-section-about">About</span>
+          {{ (this.seriesTvMainInfoDetail$ | async)?.name }}
+        </h3>
+      </div>
+
+      <div class="about-container">
+        <div class="previewModal-tags">
+          <span class="previewModal-tags-label">Creators:</span
+          ><a class="tag-item">{{
+            (this.seriesTvMainInfoDetail$ | async)?.network?.name
+          }}</a>
+        </div>
+        <div class="previewModal-tags">
+          <span class="previewModal-tags-label" id="more">Cast:</span>
+          @for(personCast of peopleCastSeries$ | async; track $index){
+          <a class="tag-item"
+            >{{ personCast
+            }}{{
+              $index === (peopleCastSeries$ | async)?.length - 1
+                ? ''
+                : ',&nbsp;'
+            }}</a
+          >
+          } @empty {
+          <a class="tag-item">There are no person</a>
+          }
+        </div>
+        <div class="previewModal-tags">
+          <span class="previewModal-tags-label">Genres:</span
+          ><a class="tag-item">{{
+            (this.seriesTvMainInfoDetail$ | async)?.genres
+          }}</a>
+        </div>
+        <div class="previewModal-tags">
+          <span class="previewModal-tags-label">Maturity Rating:</span
+          ><a class="tag-item maturity-rating">
+            @if(config.data.ratingNumberCover){
+            <span class="rating-number"
+              >{{
+                this.config.data.ratingNumberCover[
+                  this.config.data.indexSelectedItem
+                ]
+              }}+</span
+            >
+            }
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

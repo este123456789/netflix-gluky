@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "useDefineForClassFields": false,
+    "strictPropertyInitialization": false,
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  },
+  "extends": "./tsconfig.base.json"
+}

@@ -1,0 +1,208 @@
+<div class="cover-image-wrapper">
+  @if(showVideoPreview){ @defer(when showVideoPreview){
+  <div class="youtube-container">
+    <youtube-player
+      #player
+      [videoId]="keyYTVideo"
+      [width]="'100%'"
+      [height]="'100%'"
+      [playerVars]="playerVars"
+      (stateChange)="onStateChange()"
+      (ready)="onPlayerReady()"
+    ></youtube-player>
+  </div>
+  } }@else {
+  <!-- Static Cover Image -->
+  <img
+    class="static-image"
+    [src]="(this.coverMainImageAndTypography$ | async)?.[0]?.resolutions?.original?.url"
+    alt="cover image Strager Things"
+  />
+  }
+</div>
+
+<!-- cover Info Image -->
+<div class="fill-container">
+  <!-- Main actions -->
+  <div class="info-meta-layer">
+    <div class="logo-and-text meta-layer">
+      <div class="titleWrapper">
+        <div class="billboard-title">
+          @if(this.logoImagesKeepWatching$ | async; as logo){
+          <img
+            alt="Stranger Things logo"
+            class="title-logo"
+            [ngSrc]="'https://image.tmdb.org/t/p/w500' + logo[1]"
+            width="383.44"
+            height="138.93"
+            priority
+          />
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-between">
+    <!-- main actions buttons-->
+    <div class="col-6" style="left: 4%">
+      <div class="d-flex flex-row justify-content-start main-controllers">
+        <!--        Play-->
+        <button
+          class="btn btn-light simple-btn responsive-btn p-2"
+          (click)="playVideo(this.selectedIdMainTMDB)"
+        >
+          <div class="container-svg icon baseline">
+            <svg
+              width="32"
+              height="32"
+              fill="currentColor"
+              class="bi bi-play-fill"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M5 2.69127C5 1.93067 5.81547 1.44851 6.48192 1.81506L23.4069 11.1238C24.0977 11.5037 24.0977 12.4963 23.4069 12.8762L6.48192 22.1849C5.81546 22.5515 5 22.0693 5 21.3087V2.69127Z"
+              ></path>
+            </svg>
+          </div>
+
+          <div class="space-between"></div>
+
+          <span class="text-btn">Play</span>
+        </button>
+
+        <!--        More info-->
+        @if(this.coverMainImageAndTypography$ | async; as URLMainImage){
+        @if(this.logoImagesKeepWatching$ | async; as logo){
+        <button
+          type="button"
+          class="btn btn-secondary simple-btn responsive-btn p-2"
+          (click)="
+            openDialogCoverImage(
+              URLMainImage[0]?.resolutions?.original?.url,
+              1,
+              this.selectedIdMainTvMaze,
+              this.selectedIdMainTMDB,
+              logo[1]
+            )
+          "
+        >
+          <div class="container-svg icon baseline">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              fill="currentColor"
+              class="bi bi-info-circle"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
+              />
+              <path
+                d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"
+              />
+            </svg>
+          </div>
+
+          <div class="space-between"></div>
+
+          <span class="text-button">More info</span>
+        </button>
+        } }
+      </div>
+    </div>
+
+    <!-- Other actions buttons-->
+    <div class="col-6">
+      <div class="info-meta-layer-other-actions">
+        <span
+          class="previewModal-player-wrapper preview-audio-toggle"
+          (click)="onClickSpeakerIcon()"
+        >
+          @if (showRefreshIcon){
+          <!-- Refresh -->
+          <button class="btn-circle svg-container" (click)="onReplayVideo()">
+            <svg viewBox="0 0 24 24" fill="#fff">
+              <path
+                fill="#fff"
+                d="M13.1747 3.07702C11.01 2.79202 8.81537 3.30372 6.99988 4.51679C5.18439 5.72987 3.8718 7.56158 3.30668 9.67065C2.74155 11.7797 2.96243 14.0223 3.92815 15.9806C4.89388 17.9389 6.53859 19.4794 8.55586 20.3149C10.5731 21.1505 12.8254 21.2242 14.893 20.5224C16.9606 19.8205 18.7025 18.391 19.7942 16.5L18.0622 15.5C17.2131 16.9708 15.8582 18.0826 14.2501 18.6285C12.642 19.1744 10.8902 19.1171 9.32123 18.4672C7.75224 17.8173 6.47302 16.6192 5.7219 15.096C4.97078 13.5729 4.79899 11.8287 5.23853 10.1883C5.67807 8.5479 6.69897 7.12324 8.11102 6.17973C9.52307 5.23623 11.23 4.83824 12.9137 5.05991C14.5974 5.28158 16.1432 6.10778 17.2629 7.3846C18.1815 8.43203 18.762 9.7241 18.9409 11.0921L17.5547 10.168L16.4453 11.8321L19.4453 13.8321C19.7812 14.056 20.2188 14.056 20.5547 13.8321L23.5547 11.8321L22.4453 10.168L20.9605 11.1578C20.784 9.27909 20.0201 7.49532 18.7666 6.06591C17.3269 4.42429 15.3395 3.36202 13.1747 3.07702Z"
+              ></path>
+            </svg>
+          </button>
+          }@else { @if(showSpeakerUpIcon){
+          <!-- Speaker up -->
+          <nf-speakerup-button [mediumSize]="true"></nf-speakerup-button>
+          }@else {
+          <!-- Speaker down -->
+          <nf-speakerdown-button [mediumSize]="true"></nf-speakerdown-button>
+          } }
+        </span>
+
+        <span class="maturity-rating-home"> {{ mainMaturityRating }}+ </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main content cover card -->
+@if (isValidUser) {
+<div class="container-fluid">
+  @defer (when isValidUser){
+  <!-- User N, Keep watching -->
+  <nf-swiper-container
+    [titleSlide]="'User' + selectUser?.getIdUser() + ', keep watching :'"
+    [coverImages]="coverImgKeepWatching$ | async"
+    [logoImages]="logoImagesKeepWatching$ | async"
+    [coverIndexImages]="coverIndexImgKeepWatching"
+    [coverIndexImagesTMDB]="coverIndexImgKeepWatchingTMDB"
+    [numbersOfSeasons]="numbersOfSeasonsKeepWatching$ | async"
+    [genresCoverImages]="genresCoverImagesKeepWatching$ | async"
+    (playStopEvent)="onPlayStopEvent($event)"
+    (emitRatingNumber)="onEmitRatingNumber($event)"
+  ></nf-swiper-container>
+
+  <!--  My list-->
+  <nf-swiper-container
+    [titleSlide]="'My List'"
+    [coverImages]="coverImgMyList$ | async"
+    [logoImages]="logoImagesMyList$ | async"
+    [coverIndexImages]="coverIndexImgMyList"
+    [coverIndexImagesTMDB]="coverIndexImgMyListTMDB"
+    [numbersOfSeasons]="numbersOfSeasonsMyList$ | async"
+    [genresCoverImages]="genresCoverImagesMyList$ | async"
+    (playStopEvent)="onPlayStopEvent($event)"
+  ></nf-swiper-container>
+
+  <!--  Top rated-->
+  <nf-swiper-container
+    [titleSlide]="'Top rated Movies'"
+    [coverImages]="coverImgTopRatedMovies$ | async"
+    [logoImages]="logoImagesTopRatedMovies$ | async"
+    [coverIndexImages]="coverIndexTopRatedMovies"
+    [coverIndexImagesTMDB]="coverIndexTopRatedMoviesTMDB"
+    [numbersOfSeasons]="numbersOfSeasonsTopRatedMovies$ | async"
+    [genresCoverImages]="genresCoverImagesTopRatedMovies$ | async"
+    (playStopEvent)="onPlayStopEvent($event)"
+  ></nf-swiper-container>
+
+  <!-- Tv Shows -->
+  <nf-swiper-container
+    [titleSlide]="'Tv Shows'"
+    [coverImages]="coverImgTvShows$ | async"
+    [logoImages]="logoImagesTvShows$ | async"
+    [coverIndexImages]="coverIndexTvShows"
+    [coverIndexImagesTMDB]="coverIndexTvShowsTMDB"
+    [numbersOfSeasons]="numbersOfSeasonsTvShows$ | async"
+    [genresCoverImages]="genresCoverImagesTvShows$ | async"
+    (playStopEvent)="onPlayStopEvent($event)"
+  ></nf-swiper-container>
+
+  <!-- Footer -->
+  <nf-footer></nf-footer>
+  }
+</div>
+}@else {
+<!--Choose your profile-->
+<nf-profile-gate></nf-profile-gate>
+}

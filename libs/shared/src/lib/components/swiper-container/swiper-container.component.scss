@@ -1,0 +1,513 @@
+@font-face {
+  font-family: Aestetico-bold;
+  src: url('/assets/font/Aestetico-bold.otf');
+}
+
+h3,
+p,
+.year,
+.seasons {
+  font-family: 'Aestetico-bold', sans-serif;
+}
+
+html {
+  font-size: 16px;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  top: 0;
+}
+
+/*Responsive*/
+img {
+  max-width: 100%;
+  height: 100%;
+}
+
+/**Animation swiper ******************************/
+//Override overflow:hidden and fixed overlap between swiper when hover
+.swiper {
+  overflow: unset !important;
+}
+
+.title-slide {
+  font-size: 1.4vw;
+  font-weight: bold;
+  margin-top: -5px;
+  margin-left: 60px;
+  position: relative;
+}
+
+.title-slide:hover {
+  cursor: pointer;
+  color: #fff;
+}
+
+.swiper-wrapper {
+  -webkit-transition: 350ms -webkit-transform;
+  transition: 350ms transform, 350ms -webkit-transform;
+  position: relative;
+  display: flex;
+  padding-bottom: 3vw;
+}
+
+.swiper-slide {
+  margin-left: 1px;
+  margin-right: 1px;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  height: auto;
+  width: auto;
+  max-width: 286.286px;
+  -o-object-fit: cover;
+  object-fit: cover;
+  transition: opacity 1s ease-out 300ms;
+}
+
+.container-hover-btn {
+  position: relative;
+}
+
+.hover-text-add-btn,
+.hover-text-check-btn {
+  display: none;
+  position: absolute;
+  left: -3em;
+  bottom: 3em;
+  font-weight: bold;
+  padding: 0.4em;
+  padding-left: 1em;
+  width: 8.5em;
+  color: black;
+  background-color: #e6e6e6;
+  border-radius: 7px;
+}
+
+//Hover text in home page
+.card-details .container-triangle {
+  left: 0.3em;
+  bottom: 1.5em;
+}
+
+.hover-text-check-btn {
+  width: 11.5em;
+  left: -4.5em;
+}
+
+.card-details .hover-text-add-btn,
+.card-details .hover-text-check-btn {
+  font-size: 13px;
+  bottom: 2.5em;
+  padding-left: 0.7em;
+}
+
+.card-details .hover-text-check-btn {
+  left: -4.2em;
+}
+
+.container-triangle {
+  display: none;
+  position: absolute;
+  width: 1.5em;
+  bottom: 2.8em;
+  color: #e6e6e6;
+  left: 0.8em;
+}
+
+nf-add-button:hover ~ .container-hover-btn .hover-text-add-btn,
+nf-add-button:hover ~ .container-hover-btn .container-triangle,
+nf-check-button:hover ~ .container-hover-btn .hover-text-check-btn,
+nf-check-button:hover ~ .container-hover-btn .container-triangle {
+  display: block;
+}
+
+.svg-container {
+  width: 40px;
+  height: 40px;
+  overflow: auto;
+}
+
+.first-line-info,
+.second-line-info,
+.evidence-list {
+  width: fit-content;
+  block-size: fit-content;
+}
+
+.first-line-info .match-score {
+  color: #46d369;
+  white-space: unset;
+  font-size: 0.7em;
+  font-weight: 500;
+}
+
+.detail-modal-container {
+  .first-line-info {
+    margin-top: 0.8em;
+
+    .match-score {
+      font-size: 1.1em;
+    }
+  }
+
+  .second-line-info {
+    margin-bottom: 0.8em;
+  }
+}
+
+.video-metadata-container-info .second-line-info .maturity-rating,
+.video-metadata-container-info .second-line-info .duration,
+.video-metadata-container-info .second-line-info .player-feature-badge,
+.video-metadata-container-tags .evidence-tags .evidence-list .evidence-item {
+  display: inline-block;
+  font-size: 0.6em;
+  font-weight: 500;
+}
+
+.video-metadata-container-info .second-line-info .maturity-rating,
+.video-metadata-container-info .second-line-info .duration,
+.video-metadata-container-info .second-line-info .player-feature-badge {
+  margin-right: 4px;
+}
+
+.detail-modal-container .first-line-info {
+  .match-score,
+  .year,
+  .seasons,
+  .player-feature-badge,
+  .maturity-rating {
+    margin: 0.25em 0.5em 0.25em 0;
+  }
+}
+
+.evidence-list .evidence-item {
+  display: flex;
+  padding-right: 0.5vw;
+}
+
+.evidence-list .evidence-item .evidence-text {
+  font-size: 1em;
+}
+
+.evidence-text {
+  color: #fff;
+  font-size: 0.8vw;
+  line-height: 1.3;
+  position: relative;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.7);
+}
+
+.evidence-item:nth-child(n):not(:first-child)::before {
+  color: #646464;
+  content: '\2022';
+  display: inline-block;
+  font-size: 0.8vw;
+  padding-right: 0.2vw;
+}
+
+.evidence-separator::before {
+  color: #646464;
+  content: '\2022';
+  display: inline-block;
+  font-size: 1vw;
+  padding-right: 0.5vw;
+}
+
+.maturity-rating .rating-number {
+  border: 1px solid hsla(0, 0%, 100%, 0.4);
+  overflow: hidden;
+  padding: 0 0.4em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  unicode-bidi: normal;
+  white-space: nowrap;
+}
+
+.player-feature-badge {
+  border: 1px solid hsla(0, 0%, 100%, 0.4);
+  border-radius: 3px;
+  color: hsla(0, 0%, 100%, 0.9);
+  font-size: 0.7em;
+  padding: 0 0.5em;
+  white-space: nowrap;
+}
+
+.detail-modal-container .first-line-info .player-feature-badge,
+.video-metadata-container-info .second-line-info .player-feature-badge {
+  border: 1px solid hsla(0, 0%, 100%, 0.4);
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  unicode-bidi: normal;
+  white-space: nowrap;
+}
+
+.detail-modal-container .first-line-info .player-feature-badge {
+  font-size: 0.9em;
+}
+
+.detail-modal-container .first-line-info .player-feature-badge,
+.detail-modal-container .first-line-info .maturity-rating {
+  max-width: 40px;
+  display: inline-block;
+}
+
+/***************Swiper Element */
+
+.swiper-slide:hover .card-img {
+  border: 1px ridge black;
+}
+
+.swiper-slide:first-child:hover {
+  margin-left: 10px;
+}
+
+.swiper-wrapper:hover {
+  -webkit-transform: translateX(-15px);
+  -ms-transform: translateX(-15px);
+  -moz-transform: translateX(-15px);
+  -o-transform: translateX(-15px);
+  transform: translateX(-15px);
+  z-index: 9;
+}
+
+.swiper-wrapper:hover .swiper-slide:hover {
+  -webkit-transform: scale(1.7);
+  -ms-transform: scale(1.7);
+  -moz-transform: scale(1.7);
+  -o-transform: scale(1.7);
+  transform: scale(1.7);
+  z-index: 4;
+  transition: ease-in-out 400ms;
+  transition-delay: 0.24s;
+  opacity: 1;
+}
+
+.swiper-wrapper:hover .swiper-slide:first-child:hover {
+  transform-origin: 30% 50%;
+
+  -webkit-transform: scale(1.7);
+  -ms-transform: scale(1.7);
+  -moz-transform: scale(1.7);
+  -o-transform: scale(1.7);
+  transform: scale(1.7);
+  z-index: 4;
+  transition: ease-in-out 400ms;
+  transition-delay: 0.24s;
+  opacity: 1;
+}
+
+.swiper-slide:first-child:hover ~ .swiper-slide {
+  -webkit-transform: translateX(7vw);
+  -ms-transform: translateX(7vw);
+  -moz-transform: translateX(7vw);
+  -o-transform: translateX(7vw);
+  transform: translateX(7vw);
+  transition-duration: 1s;
+  transition: ease 500ms;
+  transition-delay: 0.28s;
+  touch-action: auto;
+  opacity: 0.4;
+}
+
+.swiper-wrapper:hover .swiper-slide {
+  -webkit-transform: translateX(-5vw);
+  -ms-transform: translateX(-5vw);
+  -moz-transform: translateX(-5vw);
+  -o-transform: translateX(-5vw);
+  transform: translateX(-5vw);
+  touch-action: auto;
+  opacity: 0.4;
+  transition: ease 500ms;
+  transition-delay: 0.28s;
+  z-index: 9;
+}
+
+.swiper-slide:hover ~ .swiper-slide {
+  -webkit-transform: translateX(5vw);
+  -ms-transform: translateX(5vw);
+  -moz-transform: translateX(5vw);
+  -o-transform: translateX(5vw);
+  transform: translateX(5vw);
+  transition-duration: 1s;
+  transition: ease 500ms;
+  transition-delay: 0.28s;
+  touch-action: auto;
+  opacity: 0.4;
+  z-index: 9;
+}
+
+.card-details {
+  display: none;
+  padding: 0.5em;
+  color: white;
+  width: 100%;
+  position: absolute;
+}
+
+.swiper-slide:hover > .card-details {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #181818;
+}
+
+.card-img,
+.card-details {
+  border-radius: 4px;
+}
+
+.container-logo-img {
+  position: absolute;
+  max-width: 100%;
+  bottom: 0;
+  padding: 0 0 1rem 1rem;
+}
+
+.logo-img {
+  position: relative;
+  max-width: 100%;
+  width: 44%;
+}
+
+.card-icons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #ffffff;
+  opacity: 0;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 1;
+}
+
+/* *****************Video player */
+.youtube-container {
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 16/9;
+  pointer-events: none;
+
+  iframe {
+    /* Extend it beyond the viewport... */
+    width: 300%;
+    height: 100%;
+    /* ...and bring it back again */
+    margin-left: -100%;
+  }
+}
+
+/* Media query */
+@media screen and (min-width: 1281px) and (max-width: 1600px) and (orientation: landscape) {
+  body,
+  html {
+    font-size: 0.75vw;
+  }
+}
+
+@media screen and (min-width: 601px) {
+  .title-slide,
+  p,
+  h3 {
+    font-size: 1.4vw;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .card-details {
+    padding: 0.25em !important;
+  }
+
+  .first-line-info .match-score,
+  .video-metadata-container-info .second-line-info .maturity-rating,
+  .video-metadata-container-info .second-line-info .duration,
+  .video-metadata-container-info .second-line-info .player-feature-badge,
+  .video-metadata-container-tags .evidence-tags .evidence-list .evidence-item {
+    font-size: 0.5em;
+  }
+
+  .maturity-rating .rating-number,
+  .player-feature-badge {
+    padding: 0 0.2em;
+  }
+
+  /* Hover text in Add/check button */
+  .hover-text-add-btn,
+  .hover-text-check-btn {
+    font-size: 7px !important;
+    bottom: 2em !important;
+  }
+
+  .card-details .container-triangle {
+    bottom: 0.6em;
+  }
+
+  .container-triangle {
+    width: 0.6em;
+  }
+}
+
+@media screen and (min-width: 500px) and (max-width: 600px) {
+  .hover-text-add-btn,
+  .hover-text-check-btn {
+    bottom: 2.2em !important;
+  }
+}
+
+//21:9 size
+@media screen and (min-width: 1921px) and (orientation: landscape) {
+  body,
+  html {
+    font-size: 14px;
+  }
+}
+
+//notebook
+@media screen and (min-width: 1281px) and (max-width: 1600px) and (orientation: landscape) {
+  body,
+  html {
+    font-size: 0.75vw;
+  }
+}
+
+@media screen and (min-width: 841px) and (max-width: 1280px) and (orientation: landscape) {
+  body,
+  html {
+    font-size: 0.85vw;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 840px) and (orientation: landscape) {
+  body,
+  html {
+    font-size: 1.2vw;
+  }
+}
+
+//Ipad
+@media screen and (min-width: 481px) and (max-width: 840px) and (max-aspect-ratio: 4 / 3) {
+  body,
+  html {
+    font-size: 1vw;
+  }
+}
+
+//smartphone
+@media screen and (min-width: 0) and (max-width: 480px) and (max-aspect-ratio: 4 / 3) {
+  body,
+  html {
+    font-size: 1.5vw;
+  }
+
+  .navbar {
+    padding: 0 !important;
+  }
+}

@@ -1,0 +1,94 @@
+.btn-circle {
+  background-color: rgba(42, 42, 42, 0.6);
+}
+
+.btn-circle-white {
+  background-color: white;
+}
+
+.btn-circle,
+.btn-circle-white {
+  border-radius: 24px;
+  padding: 8px;
+  margin: 0.25em;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.btn-round-blk {
+  border: none !important;
+}
+
+.btn-circle-medium {
+  height: 2.8rem;
+  width: 2.8rem;
+  min-height: 32px;
+  max-height: 42px;
+  min-width: 32px;
+  max-width: 42px;
+}
+
+.btn-circle:hover {
+  border-color: white;
+}
+
+.btn-circle-white:hover {
+  background-color: rgba(205, 205, 205, 0.6);
+  border-color: rgba(205, 205, 205, 0.6);
+}
+
+
+.btn-add:hover ~ .container-hover-btn .hover-text-add-btn,
+.btn-add:hover ~ .container-hover-btn .container-triangle,
+.btn-check:hover ~ .container-hover-btn .hover-text-check-btn,
+.btn-check:hover ~ .container-hover-btn .container-triangle {
+  display: block;
+}
+
+.card-details .hover-text-add-btn,
+.card-details .hover-text-check-btn {
+  font-size: 13px;
+  bottom: 2.5em;
+  padding-left: 0.7em;
+}
+
+.btn-icon-cover {
+  padding: 0 !important;
+}
+
+.arrow-down {
+  margin-left: auto !important;
+}
+
+.container-hover-btn {
+  position: relative;
+}
+
+/* Media query */
+@media only screen and (max-width: 700px) {
+  .btn-icon-cover {
+    width: 16px;
+    height: 16px;
+  }
+
+  svg {
+    width: 8px;
+    height: 8px;
+  }
+
+  .btn-circle {
+    border: 1px solid rgba(255, 255, 255, 0.7);
+  }
+
+  .btn-circle-white,
+  .btn-circle {
+    margin: 0.1em;
+  }
+}
